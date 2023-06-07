@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fullfill_seller_app/authentication/auth_screen.dart';
+import 'package:fullfill_seller_app/mainScreens/home_screen.dart';
 import '../global/global.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -15,11 +17,13 @@ class _MySplashScreenState extends State<MySplashScreen> {
     Timer(const Duration(seconds: 1), () async {
       //if seller is loggedin already
       if (firebaseAuth.currentUser != null) {
-        // Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const HomeScreen()));
       }
       //if seller is NOT loggedin already
       else {
-        // Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
       }
     });
   }
@@ -27,7 +31,6 @@ class _MySplashScreenState extends State<MySplashScreen> {
   @override
   void initState() {
     super.initState();
-
     startTimer();
   }
 
@@ -44,9 +47,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: Image.asset("images/splash.jpg"),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text(
