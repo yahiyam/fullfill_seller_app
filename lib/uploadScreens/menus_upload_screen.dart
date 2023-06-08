@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_seller_app/mainScreens/home_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MenusUploadScreen extends StatefulWidget {
   const MenusUploadScreen({super.key});
@@ -9,6 +10,8 @@ class MenusUploadScreen extends StatefulWidget {
 }
 
 class _MenusUploadScreenState extends State<MenusUploadScreen> {
+  XFile? imageXFile;
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     return defaultScreen();
@@ -32,7 +35,11 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
         ),
         title: const Text(
           "Add New Menu",
-          style: TextStyle(fontSize: 30, fontFamily: "Lobster"),
+          style: TextStyle(
+            fontSize: 30,
+            fontFamily: "Lobster",
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -68,13 +75,6 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
                 size: 200.0,
               ),
               ElevatedButton(
-                child: const Text(
-                  "Add New Menu",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.amber),
@@ -85,13 +85,85 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
                   ),
                 ),
                 onPressed: () {
-                  // takeImage(context);
+                  takeImage(context);
                 },
+                child: const Text(
+                  "Add New Menu",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  takeImage(mContext) {
+    return showDialog(
+      context: mContext,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text(
+            "Menu Image",
+            style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
+          ),
+          children: [
+            SimpleDialogOption(
+              onPressed: captureImageWithCamera,
+              child: const Text(
+                "Capture with Camera",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            SimpleDialogOption(
+              onPressed: pickImageFromGallery,
+              child: const Text(
+                "Select from Gallery",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            SimpleDialogOption(
+              child: const Text(
+                "Cancel",
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  captureImageWithCamera() async {
+    Navigator.pop(context);
+
+    imageXFile = await _picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 720,
+      maxWidth: 1280,
+    );
+
+    setState(() {
+      imageXFile;
+    });
+  }
+
+  pickImageFromGallery() async {
+    Navigator.pop(context);
+
+    imageXFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 720,
+      maxWidth: 1280,
+    );
+
+    setState(() {
+      imageXFile;
+    });
   }
 }
