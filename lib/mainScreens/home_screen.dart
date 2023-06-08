@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fullfill_seller_app/global/global.dart';
+import 'package:fullfill_seller_app/uploadScreens/menus_upload_screen.dart';
 import 'package:fullfill_seller_app/widgets/my_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,8 +31,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Text(
           sharedPreferences!.getString("name")!,
+          style: const TextStyle(
+            fontSize: 30,
+            fontFamily: "Bebas",
+          ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MenusUploadScreen(),
+              ));
+            },
+            icon: const Icon(Icons.post_add),
+          ),
+        ],
       ),
     );
   }
