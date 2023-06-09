@@ -1,55 +1,30 @@
 import 'package:flutter/material.dart';
 
-class TextWidgetHeader extends SliverPersistentHeaderDelegate {
-  String? title;
-  TextWidgetHeader({this.title});
+class HeadingTitle extends StatelessWidget {
+  const HeadingTitle({
+    super.key,
+    required this.title,
+    this.padding = true,
+  });
+  final String title;
+  final bool? padding;
 
   @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return InkWell(
-      child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Colors.cyan,
-            Colors.amber,
-          ],
-          begin: FractionalOffset(0.0, 0.0),
-          end: FractionalOffset(1.0, 0.0),
-          stops: [0.0, 1.0],
-          tileMode: TileMode.clamp,
-        )),
-        height: 80.0,
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: InkWell(
-          child: Text(
-            title!,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: "Signatra",
-              fontSize: 30,
-              letterSpacing: 2,
-              color: Colors.white,
-            ),
-          ),
+  Widget build(BuildContext context) {
+    final Size screen = MediaQuery.of(context).size;
+    return Padding(
+      padding: EdgeInsets.only(
+        left: padding! ? screen.width * .05 : 0,
+        top: padding! ? screen.width * .05 : 0,
+      ),
+      child: Text(
+        title,
+        textAlign: TextAlign.left,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );
   }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
-
-  @override
-  double get maxExtent => throw UnimplementedError();
-
-  @override
-  double get minExtent => throw UnimplementedError();
 }

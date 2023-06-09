@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_seller_app/mainScreens/items_screen.dart';
-import 'package:fullfill_seller_app/models/models.dart';
+import 'package:fullfill_seller_app/models/items.dart';
 
-class InfoDesignWidget extends StatelessWidget {
-  final Menus? model;
+class ItemsDesignWidget extends StatefulWidget {
+  final Items? model;
   final BuildContext? context;
 
-  const InfoDesignWidget({
-    super.key,
-    this.model,
-    this.context,
-  });
+  const ItemsDesignWidget({super.key, this.model, this.context});
 
+  @override
+  State<ItemsDesignWidget> createState() => _ItemsDesignWidgetState();
+}
+
+class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (c) => ItemsScreen(model: model)));
+        //Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemsScreen(model: widget.model)));
       },
       splashColor: Colors.amber,
       child: Padding(
@@ -32,28 +31,37 @@ class InfoDesignWidget extends StatelessWidget {
                 thickness: 3,
                 color: Colors.grey[300],
               ),
+              const SizedBox(
+                height: 1,
+              ),
+              Text(
+                widget.model!.title!,
+                style: const TextStyle(
+                  color: Colors.cyan,
+                  fontSize: 18,
+                  fontFamily: "Train",
+                ),
+              ),
+              const SizedBox(
+                height: 2,
+              ),
               Image.network(
-                model!.thumbnailUrl!,
+                widget.model!.thumbnailUrl!,
                 height: 220.0,
                 fit: BoxFit.cover,
               ),
               const SizedBox(
-                height: 1.0,
+                height: 2.0,
               ),
               Text(
-                model!.menuTitle!,
-                style: const TextStyle(
-                  color: Colors.cyan,
-                  fontSize: 20,
-                  fontFamily: "Train",
-                ),
-              ),
-              Text(
-                model!.menuInfo!,
+                widget.model!.shortInfo!,
                 style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                 ),
+              ),
+              const SizedBox(
+                height: 1,
               ),
               Divider(
                 height: 4,
