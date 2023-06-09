@@ -67,8 +67,10 @@ class MyDrawer extends StatelessWidget {
                     style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (c) => const HomeScreen()));
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (c) => const HomeScreen()),
+                        (route) => false);
                   },
                 ),
                 const Divider(
