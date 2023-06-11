@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fullfill_seller_app/authentication/auth_screen.dart';
+import 'package:fullfill_seller_app/authPage/auth_page.dart';
 import 'package:fullfill_seller_app/mainScreens/home_screen.dart';
 import '../global/global.dart';
 
@@ -23,7 +23,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
       //if seller is NOT loggedin already
       else {
         Navigator.push(
-            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+            context, MaterialPageRoute(builder: (c) => const AuthPage()));
       }
     });
   }

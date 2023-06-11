@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fullfill_seller_app/authentication/auth_screen.dart';
+import 'package:fullfill_seller_app/authPage/auth_page.dart';
 import 'package:fullfill_seller_app/global/global.dart';
 import 'package:fullfill_seller_app/mainScreens/home_screen.dart';
 
@@ -140,7 +140,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (c) => const AuthScreen()));
+                              builder: (c) => const AuthPage()));
                     });
                   },
                 ),
